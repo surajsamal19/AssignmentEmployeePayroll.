@@ -1,0 +1,99 @@
+create database payroll_service;
+# UC1
+use payroll_service;
+show databases;
+#UC2
+create table employee_payroll (employee_Id int primary key auto_increment,employee_Name varchar(10),employee_Salary int,employee_Startdate date);
+use payroll_service;
+select * from employee_payroll;
+#Uc3
+insert into employee_payroll (employee_Name,Employee_salary,employee_StartDate) values ("yamah",287945,2016-03-08),("Moto",29000,2015-03-08),("Suzuki",7978519323,2014-03-08),("Honda",29000,2019-03-04);
+desc employee_payroll;
+#UC4
+select * from employee_payroll;
+#UC5
+select employee_salary from  employee_payroll where name = 'SURAJSAMAL';
+use payroll_service;
+select * from employee_payroll where employee_StartDate between  cast('2018-03-03' as DATE) and employee_StartDate(now());
+#uc6
+alter table employee_payroll add gender varchar(8);
+alter table employee_payroll drop column gender;
+update employee_payroll set gender = 'MAlE' where employee_Id = 1; 
+use payroll_service;
+#UC7
+select sum(employee_Salary) from employee_payroll ;
+select avg(employee_Salary) from employee_payroll;
+select max(employee_salary) from employee_payroll;
+select min(employee_salary) from employee_payroll;
+select count(employee_salary) from employee_payroll;
+#UC8
+
+alter table employee_payroll add employee_phonenumber int after employee_name;
+alter table employee_payroll add employee_address varchar(20);
+alter table employee_payroll add employee_department varchar(15);
+alter table employee_payroll alter address set default 'shym';
+describe employee_payroll;
+update  employee_payroll set employee_phonenumber = '7978519323' where employee_Id =1;
+update employee_payroll set employee_address = 'MUMBAI' where employee_Id =1;
+update employee_payroll set employee_department = 'IT' where employee_Id =1;
+select * from employee_payroll;
+#UC9
+alter table employee_payroll add employee_basicpay int;
+alter table employee_payroll add employee_deduction int;
+alter table employee_payroll add employee_Taxablepay int;
+alter table employee_payroll add employee_Incomtax int;
+alter table employee_payroll add employee_Netpay int;
+update  employee_payroll set employee_basicpay = '5' where employee_Id = 1;
+update  employee_payroll set employee_deduction = '528' where employee_Id = 1;
+update  employee_payroll set employee_taxablepay = '9' where employee_Id = 1;
+update employee_payroll set employee_Incomtax = '155' where employee_Id = 1;
+update  employee_payroll set employee_netpay = '5000' where employee_Id = 1;
+select * from employee_payroll; 
+select salary from employee_payroll where name = 'Yamaha';
+select * from employee_payroll where start between cast('2018-01-01' AS DATE)AND DATE(NOW());
+alter table employee_payroll add gender char(1) after name;
+#UC10
+update employee_payroll set department = "Sales" where id = 2;
+insert into employee_payroll (Employee_name,department,gender,Basic_pay,deductions,taxable_pay,tax,net_pay,start) values ('terisa','Marketing','F',3000000.0,100000.00,300000.0,50000.0,150000.0,2019-11-13);
+#UC11
+#After normalisation
+create database payroll_service2;
+use payroll_service2;
+create table employee (employee_Id int not null primary key,employee_name varchar(20),employee_gender varchar(10),city varchar(20),phone_number int);
+insert into  employee (employee_Id,employee_name,employee_gender,city,phone_number) values (111,'Suraj','male','kolkata',7978),(20,'Ronnie','M','Shymnagar',7548),(120,'santunu','Male','Jajpur',7978);
+select * from employee;
+create table employee_department (emp_Id int not null,emp_dep_Id int primary key,foreign key(employee_Id) references employee(employee_Id));
+insert into employee_department (emp_Id,emp_dep_Id) values (110,220);
+create table department (emp_Id int primary key,depatment_name varchar(20),foreign key(employee_Id) references employee(employee_Id));
+insert into department (emp_Id,department_name) values (1130,'IT');
+create table company (emp_Id int not null primary key,company_name varchar(10));
+insert into company (emp_Id,campany_name) values (112,'Honda');
+#UC12
+#repeat UC4,UC5,UC7
+select * from employee_payroll;
+select employee_salary from employee_payroll where name = 'SURAJSAMAL';
+use payroll_service;
+select * from employee_payroll where employee_StartDate between  cast('2018-03-03' as DATE) and employee_StartDate(now());
+select sum(employee_salary) from employee_payroll;
+select avg(employee_salary) from employee_payroll;
+select max(employee_salry) from employee_payroll;
+select min(employee_salary) from employee_payroll;
+select count(employee_salary) from employee_payroll;
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
